@@ -15,9 +15,56 @@ body {
     margin: 0px;
 }
 
+.blogNav h1 {
+    font-size: 3em;
+    text-align: center;
+    margin: 0px;
+    padding: 0px;
+}
+
+.blogNav hr {
+    margin-bottom: 50px;
+}
+
 h1 {
     font-size: 3em;
-    margin: 1em;
+}
+
+.textMain h1 {
+    margin-left: 20%;
+}
+
+.textMain p {
+    margin-top: 3%;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.textMain .sub {
+    margin-left: 20%;
+    margin-top: 0%;
+    color: grey;
+    font-size: 1em;
+}
+
+.blogNav {
+    margin-top: 5%;
+    margin-left: 30%;
+    margin-right: 30%;
+}
+
+.blogNav a {
+    padding: 20px;
+    text-decoration: none;
+    display: block;
+}
+
+.blogNav a:hover {
+    background-color: rgb(0,0,0);
+}
+
+.textSmall {
+    
 }
 
 .topnav {
