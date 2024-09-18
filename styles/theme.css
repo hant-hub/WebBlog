@@ -30,21 +30,30 @@ h1 {
     font-size: 3em;
 }
 
-.textMain h1 {
+.textMain * {
     margin-left: 20%;
+}
+
+.textMain h1 {
 }
 
 .textMain p {
     margin-top: 3%;
-    margin-left: 20%;
     margin-right: 20%;
 }
 
 .textMain .sub {
-    margin-left: 20%;
     margin-top: 0%;
     color: grey;
     font-size: 1em;
+}
+
+.textMain h2 {
+    font-size: 2em;
+}
+
+.textMain h3 {
+    font-size: 1.5em;
 }
 
 .blogNav {

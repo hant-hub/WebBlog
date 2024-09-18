@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="../styles/theme.css">
+        <title>GPU Pipeline Basics</title>
+    </head>
+    <body>
+        <ul class = "topnav">
+            <li><a href=../index.html><img src=../images/logo.jpg height=100 width=100 /></a></li>
+        </ul>
+        
+        <div class="textMain">
+            <h1>GPU Pipeline Basics</h1>
+            <p class = "sub">N/A</p>
+            <p>Computer programs are made of a few
+            fundamental parts. They all have memory, 
+            some kind of computational unit that can perform
+            logical operations, and some kind of I/O.
+            I/O ranges to many things, from networks to
+            text, to robot arms, lights, and graphics.
+
+            Graphics, especially have been a major focus of
+            computers as they present many unique problems
+            while being a powerful benchmark of what computer
+            systems are capable of.</p>
+
+            <p> Some of the main roadblocks to rendering high
+            quality images quickly include the massive number
+            of pixels that make up any given image, the sometimes
+            monumentally complex algorithms required for recreating
+            realistic images, and the physical requirements of
+            output monitors. </p>
+
+            <p> Today I just want to cover some of the computational
+            challenges and how they have lead to the modern
+            GPU rastorization pipeline.</p>
+
+            <h2>CPU Rendering</h2>
+            <p>There have been many, many rendering
+            techniques throughout computer history, from
+            vector graphics using electron beams, to scanlines,
+            to modern LED displays.
+            </p><p>
+            
+            I want to begin with a CPU rendered scene without
+            hardware acceleration but with a dedicated video
+            controller.
+
+            If you are interested what kinds of jobs a video
+            controller might do, I might revisit it later,
+            or you can look into Atari 2600 development.
+
+            </p><p>
+
+
+            In a modern pixel based display an image is essential
+            an array of color information. Each pixel is associated
+            with 3 numbers which encode the amount of red, green,
+            and blue light composes the color of that pixel.
+
+            Each time the displace updates, the video controller
+            will either read or copy the information from the 
+            specific region of memory associated with the screen
+            and set each pixel.
+
+            In early systems like the SNES or NES specific amounts
+            of time were set aside for rendering, this time was
+            essentially the time between frames when the video
+            controller was not actively reading information, known
+            as V-Blank. 
+
+            On more modern systems there might be two or more
+            copies of the memory region, allowing for rendering
+            during a frame. These techniques are called buffering.
+
+            Putting aside a ton of technical details, from the
+            perspective of a programmer, there would be a specific
+            region of memory which corrosponds to the color data.
+
+            When rendering, you go in and edit the values in
+            the memory region. 
+            </p>
+
+            <h3> Example </h3>
+
+            <p>
+            Something that will be important going forward
+            is the fact that we could have taken two distinct
+            approaches to rendering.
+
+            I can't find the original place I found these
+            terms, and they can be easily confused with
+            forward and deffered rendering, so take the
+            terminology with a grain of salt.
+
+            One approach is known as forward rendering, the 
+            idea being to increase efficiency by calculating
+            what pixels need to be set per object you are
+            drawing, with the idea that you don't need to
+            touch any pixels that aren't part of your object.
+
+            The other approach is what I'm calling Backwards
+            rendering. The idea is that you iterate over all
+            pixels and then query a data structure to calculate
+            the color.
+
+            Both Forward and Backward approaches are used in 
+            modern systems, although Backward systems tend to
+            be more efficient.
+
+            </p>
+
+            <h2>Hardware Acceleration</h2>
+            <p>
+            </p>
+
+
+
+            <h2>Modern GPUS</h2>
+            <h2>GPU Pipeline</h2>
+        </div>
+    </body>
+</html>
