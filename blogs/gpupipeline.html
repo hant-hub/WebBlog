@@ -42,9 +42,9 @@
             to modern LED displays.
             </p><p>
             
-            I want to begin with a CPU rendered scene without
-            hardware acceleration but with a dedicated video
-            controller.
+            I want to begin with the basics of Software
+            Rendering without hardware acceleration but 
+            with a dedicated video controller.
 
             If you are interested what kinds of jobs a video
             controller might do, I might revisit it later,
@@ -81,8 +81,6 @@
             the memory region. 
             </p>
 
-            <h3> Example </h3>
-
             <p>
             Something that will be important going forward
             is the fact that we could have taken two distinct
@@ -112,12 +110,120 @@
 
             <h2>Hardware Acceleration</h2>
             <p>
+            To tackle the scale problem of graphics people have,
+            for a long time, attempted to offload the workload
+            to hardware. From the arcade cabinets to modern
+            discrete GPUs.
+
+            Most approaches to hardware rendering cards take
+            advantage two key properties of Graphics algorithms.
+            </p>
+            <p> 
+            The first key property is that hardware has the capability
+            to be significantly faster than any software. Software is
+            hardware interacting with itself, so any hardware 
+            implementation will tend to be faster.
+            </p>
+            <p>
+            The second, more interesting property is that graphics
+            algorithms are embarrassingly parallel. Each pixel requires
+            a similar amount of work, and runs the same algorithm.
+
+            A classic example is raycasting, for an incredibly simple
+            raycasting algorithm you run the exact same math for every
+            single pixel.
             </p>
 
+            <p>
+            These characteristics mean that an optimal processor for 
+            graphics would be as massively parallel as possible.
+            In traditional CPU design, in the interest of flexibility
+            and performance in a wider range of algorithms beyond
+            graphics, instruction set variety and clock speeds are
+            prioritized over raw core numbers. 
 
-
-            <h2>Modern GPUS</h2>
+            In addition to the tradeoffs of flexibility vs core count
+            there is also the complexity and additional cost of 
+            coordinating highly parallel systems. Large portions of
+            chips are dedicated to managing and coordinating
+            these parallel cores. And even large portions of software
+            running on parallel chips are purely synchronization or
+            logistics.
+            </p>
+            
             <h2>GPU Pipeline</h2>
+            <p>
+            Modern GPUs are built off of the concept of rasterization.
+            GPUs take as input, points in space, which are then
+            connected into triangles, and then each triangle can
+            be used to color pixels.
+
+
+            GPUs are highly specialized, so they are conceptualized as
+            pipelines, where data is transformed and reformatted
+            until eventually being drawn to the screen.
+            </p>
+            
+            <p>
+            The first stage of the pipeline is assembling the input.
+            The raw data from the cpu is split, first into triangles,
+            and then into individual verticies, and finally into
+            specific pieces of data associated with each vertex.
+            </p><p>
+
+            The Second part of the pipeline is the Vertex Shader. This
+            is the first programmable part of the graphics pipeline.
+            The job of the Vertex Shader is to process and transform
+            each vertex from whatever arbitrary data it originally had
+            to a screen space position. The other job of the Vertex Shader
+            is to pass along any data that will later be required to draw
+            individual pixels.
+
+            </p><p>
+            After the Vertex shader is the first optional stage.
+            The Tessellation stage, allows for programmatically 
+            inserting more verticies and subdividing triangles 
+            into additional triangles. This allows for insertion 
+            of additional detail based on dynamic detail.
+
+            </p><p>
+            After Tessellation is the optional geometry shader stage.
+            The Geometry shader operates on Triangles, and can add
+            or discard Triangles before they move to the next stages. 
+
+            </p><p>
+            The next stage is the hardware rasterizer. Here, triangles
+            are converted into pixels that need to be shaded.
+
+            The rastorizer will then distribute pixels to the next
+            stage, the Fragment Stage. Each pixel from the rasterizer 
+            is processed and an output color is chosen.
+
+            </p><p>
+            The next fixed stage is Color Blending, overlapping triangles
+            may output contradictory colors for the same pixel, so at
+            this stage a single color is chosen for every pixel in the
+            output image.
+
+            </p><p>
+            Once every pixel in the output image has a specified color the
+            image can then be displayed to the screen or saved to an image
+            or any number of uses.
+            </p>
+            
+
+            <p>
+            And that's it! The Modern graphics pipeline might be intimidating
+            at first, however once you understand a little history, and you
+            simplify the stages, it is clear how data is decompressed, transformed
+            and eventually outputted to the screen.
+            </p>
+
+            <p>
+            Next time I am going to talk about Vulkan specifically and how
+            I conceptualize the flow of data through a Vulkan graphical
+            renderer.
+            </p>
         </div>
     </body>
 </html>
